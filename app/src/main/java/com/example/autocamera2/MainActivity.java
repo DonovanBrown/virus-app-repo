@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private DragRectView drag;
     private int dx;
     private int dy;
+    private int sads;
 
     /**
      * Sets up the button click listeners and starts the service
