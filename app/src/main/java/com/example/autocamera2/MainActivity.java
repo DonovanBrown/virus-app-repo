@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "mainActivity";
     private static final int REQUEST_CAMERA_PERMISSION = 200;
     public static final int SECOND_TO_MILLI = 1000;
-
+    public static boolean frontBack;
     private TakePhotoService mService;
     boolean mBounded;
     private AutoFitTextureView textureView;
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.editTextNumber);
         EditText editText2 = findViewById(R.id.editTextNumber2);
         ToggleButton toggleBtn = findViewById(R.id.toggleButton);
+        ToggleButton cam = findViewById(R.id.switchCam);
         textureView = findViewById(R.id.textureView);
         Button done = findViewById(R.id.done);
         registerReceiver(myReceiver, new IntentFilter(TakePhotoService.INTENT_FILTER));
@@ -95,9 +96,20 @@ public class MainActivity extends AppCompatActivity {
                 mService.unPauseTask();
             }
         });
+
+        cam.setOnClickListener(view -> {
+            boolean on = ((ToggleButton) view).isChecked();
+            mService.onDestroy();
+            if (on) {
+                frontBack = true;
+            } else {
+                frontBack = false;
+            }
+            mService.openCamera();
+        });
+
         textureView.setSurfaceTextureListener(textureListener);
         textureView.setOnClickListener(view -> mService.takePicture());
-
 
         drag = findViewById(R.id.drag);
 

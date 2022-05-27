@@ -150,22 +150,40 @@ public class TakePhotoService extends Service {
     public void openCamera() {
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         Log.e(TAG, "opening camera");
-        try {
-            String cameraId = manager.getCameraIdList()[1];
-            CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
-            StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-            mSensorOrientation = characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION);
-            assert map != null;
-            //imageDimension = map.getOutputSizes(SurfaceTexture.class)[0];
-            imageDimension = new Size(1280, 960);
-            if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                showToast("Please grant permissions before starting the service.");
-            } else {
-                manager.openCamera(cameraId, stateCallback, null);
+            if(MainActivity.frontBack == true) {
+                try {
+                    String cameraId = manager.getCameraIdList()[1];
+                    CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
+                    StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+                    mSensorOrientation = characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION);
+                    assert map != null;
+                    imageDimension = new Size(1280, 960);
+                    if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    showToast("Please grant permissions before starting the service.");
+                    } else {
+                    manager.openCamera(cameraId, stateCallback, null);
+                    }
+                } catch (CameraAccessException e) {
+                e.printStackTrace();
+                }
             }
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-        }
+            else{
+                try {
+                    String cameraId = manager.getCameraIdList()[0];
+                    CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
+                    StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+                    mSensorOrientation = characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION);
+                    assert map != null;
+                    imageDimension = new Size(1280, 960);
+                    if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        showToast("Please grant permissions before starting the service.");
+                    } else {
+                        manager.openCamera(cameraId, stateCallback, null);
+                    }
+                } catch (CameraAccessException e) {
+                e.printStackTrace();
+                }
+            }
     }
 
     /**

@@ -31,10 +31,11 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="66dp"
         android:layout_weight="1"
         android:gravity="center_horizontal"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/text2"
             android:layout_width="wrap_content"
@@ -57,6 +58,7 @@
                 android:textAlignment="center" />
 
         </RelativeLayout>
+
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
@@ -87,21 +89,29 @@
 
         </RelativeLayout>
 
-
-
+        <ToggleButton
+            android:id="@+id/switchCam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/my_btn_toggle"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/white"
+            android:textOff="Flip Camera"
+            android:textOn="Flip Camera" />
 
 
     </LinearLayout>
 
     <ToggleButton
         android:id="@+id/toggleButton"
-        android:layout_width="wrap_content"
+        android:layout_width="108dp"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
         android:background="@drawable/my_btn_toggle"
         android:textColor="@color/white"
         android:textOff="@string/start"
-        android:textOn="@string/stop"
-        android:layout_weight= "0" />
+        android:textOn="@string/stop" />
 
     <LinearLayout
         android:layout_width="wrap_content"
